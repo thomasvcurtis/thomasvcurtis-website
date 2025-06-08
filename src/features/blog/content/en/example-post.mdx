@@ -1,0 +1,66 @@
+---
+lang: 'en'
+title: 'Blog Post Template'
+description: 'A template to help you understand how to structure your blog posts in this Astro theme.'
+pubDate: 2025-06-08
+heroImage:
+  url: '../../../../assets/placeholder.webp'
+  alt: 'Blog Post Placeholder Image'
+tags: ['guide', 'template']
+difficulty: 'beginner'
+isDraft: true
+featured: false
+relatedPosts: []
+---
+
+import InfoAlert from '@/features/blog/components/InfoAlert.astro';
+
+## How to Use This Template
+
+This is a template post that shows you how to structure your blog content. To create a new post:
+
+1. Create a new `.mdx` file in the appropriate language folder
+2. Copy this frontmatter structure
+3. Replace the values with your own content
+
+<InfoAlert title="Frontmatter Guide">
+  - `lang`: Language code ('en', etc.)
+  - `title`: Your post title
+  - `description`: Brief summary
+  - `pubDate`: Publication date
+  - `heroImage`: Main image (path and alt text)
+  - `tags`: Array of relevant tags
+  - `difficulty`: 'beginner', 'intermediate', or 'advanced'
+  - `isDraft`: Set to false to publish
+  - `featured`: Set to true to highlight
+  - `relatedPosts`: Array of related post slugs
+</InfoAlert>
+
+## Writing Your Content
+
+You can use standard Markdown syntax for:
+
+- Headers (H1-H6)
+- **Bold** and *italic* text
+- Lists and nested lists
+- [Links](https://example.com)
+- Images
+- Code blocks
+
+```markdown
+# Example Markdown
+- List item 1
+- List item 2
+```
+
+### Using Components
+
+This theme supports MDX, so you can import and use Astro components:
+
+```jsx
+import CustomComponent from '@/components/CustomComponent.astro';
+
+<CustomComponent prop="value" />
+```
+
+Delete this template content and replace it with your own blog post. Happy writing!
