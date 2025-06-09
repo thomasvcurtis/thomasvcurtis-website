@@ -8,6 +8,6 @@ My personal portfolio website and blog built with modern web technologies.
 - **Language**: [TypeScript](https://www.typescriptlang.org/) for type safety
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) with [shadcn/ui](https://ui.shadcn.com/) components
 - **Content**: MDX for blog posts with React components
-- **Hosting**: Firebase
+- **Hosting**: Vercel
 
 
