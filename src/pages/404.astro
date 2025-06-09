@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { defaultLanguage, useTranslations, type LanguageCode } from '@/i18n/ui';
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import { Image } from 'astro:assets';
 import errorIllustration from '@/assets/error.png';
 import errorIllustrationDark from '@/assets/error-dark.png';
@@ -9,8 +8,7 @@ import { buttonVariants } from '@/components/ui/button';
 import Heading from '@/components/Heading.astro';
 import { ArrowLeft } from 'lucide-react';
 
-const lang =
-  (Astro.currentLocale as LanguageCode | undefined) ?? defaultLanguage;
+const lang = 'en' as const;
 const t = useTranslations(lang, 'notFoundPage');
 
 const pageTitle = t('pageTitle');
@@ -41,7 +39,7 @@ const pageDescription = t('message');
       />
 
       <a
-        href={getRelativeLocaleUrl(lang, '/')}
+        href="/"
         class={buttonVariants({ variant: 'default' })}
       >
         <ArrowLeft className="mr-2 size-4" />

@@ -13,7 +13,6 @@ import { useTranslations } from '@/i18n/ui';
 import { formatDate } from '@/lib/utils';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import { Clock } from 'lucide-react';
 
 interface Props {
@@ -26,7 +25,7 @@ const t = useTranslations(lang, 'blogPost');
 ---
 
 <a
-  href={getRelativeLocaleUrl(lang, `/blog/${post.id.replace(`${lang}/`, '')}`)}
+  href={`/blog/${post.id.replace(`en/`, '')}`}
   class="block group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 >
   <Card

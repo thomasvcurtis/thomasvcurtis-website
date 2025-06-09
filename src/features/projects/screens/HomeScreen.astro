@@ -3,7 +3,6 @@ import Heading from '@/components/Heading.astro';
 import SkillCard from '@/components/SkillCard.astro';
 import { buttonVariants } from '@/components/ui/button';
 import type { LanguageCode } from '@/i18n/ui';
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import { Calendar, Dumbbell } from 'lucide-react';
 
 import heroImage from '@/assets/WebProfileImage.webp';
@@ -76,7 +75,7 @@ const {
           {heroViewWorkButton}
         </a>
         <a
-          href={getRelativeLocaleUrl(lang, '/contact')}
+          href="/contact"
           class={buttonVariants({ variant: 'outline', size: 'lg' })}
         >
           <Calendar className="mr-2 size-4" />

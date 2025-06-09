@@ -1,10 +1,7 @@
-export const languages: Record<'en', { name: string; flag: string }> = {
-  en: { name: 'English', flag: 'us' },
-} as const;
 
 export const defaultLanguage = 'en';
 
-export type LanguageCode = keyof typeof languages;
+export type LanguageCode = 'en';
 
 export const ui = {
   en: {
@@ -202,27 +199,20 @@ export const ui = {
   },
 } as const;
 
-export const getLanguageName = (lang: LanguageCode) => languages[lang];
-
 export type UISchema = typeof ui;
 export type FeatureType = keyof UISchema[typeof defaultLanguage];
 
 export function useTranslations<F extends FeatureType>(
-  lang: LanguageCode | undefined,
+  _lang: LanguageCode | undefined,
   feature: F
 ) {
-  // Always use English since it's the only language now
+  // Always use English
   const currentLanguage = 'en';
-
-  // Get the available keys for this feature from English
-  type AvailableKeys = keyof UISchema['en'][F];
-
-  return function t(key: AvailableKeys): string {
-    // Direct access to English translations
+  return function t(key: keyof UISchema[typeof defaultLanguage][F]): string {
     const featureTranslations = ui[currentLanguage][feature];
     if (featureTranslations && key in featureTranslations) {
       return featureTranslations[key as keyof typeof featureTranslations] as string;
     }
-    return ''; // Return empty string as fallback
+    return '';
   };
 }

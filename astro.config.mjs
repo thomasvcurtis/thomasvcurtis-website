@@ -45,10 +45,10 @@ export default defineConfig({
   ],
 
   i18n: {
-    locales: ['en', 'fr'],
     defaultLocale: 'en',
+    locales: ['en'],
     routing: {
-      prefixDefaultLocale: true,
+      prefixDefaultLocale: false,
     },
   },
 

@@ -1,14 +1,11 @@
 ---
-import { type LanguageCode } from '@/i18n/ui';
 import { AllBlogPostsScreen } from '@/features/blog';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
-const lang = (Astro.currentLocale ?? 'en') as LanguageCode;
 
+// Only show English posts since we're English-only now
 const blogEntries: Array<CollectionEntry<'blog'>> = await getCollection(
   'blog',
-  ({ data, id }) => {
-    return !data.isDraft && data.lang === 'en';
-  }
+  ({ data }) => !data.isDraft
 );
 
 const enrichedPosts = await Promise.all(
@@ -26,10 +23,11 @@ const enrichedPosts = await Promise.all(
   })
 );
 
+// Sort by publication date
 enrichedPosts.sort(
   (a, b) =>
     new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
 ---
 
-<AllBlogPostsScreen posts={enrichedPosts} lang={lang} />
+<AllBlogPostsScreen posts={enrichedPosts} lang="en" />

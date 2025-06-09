@@ -1,24 +1,14 @@
 ---
-import { defaultLanguage, type LanguageCode } from '@/i18n/ui';
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import { cn } from '@/lib/utils';
 import ThemeToggle from './ThemeToggle.astro';
-import { LanguageSelector } from './LanguageSelector';
-import { type LanguageSelectorItem } from '@/lib/i18n-utils';
-
 import type { NavItem } from '@/layouts/BaseLayout.astro';
 import { buttonVariants } from './ui/button';
 
-const currentLocale =
-  (Astro.currentLocale as LanguageCode | undefined) ?? defaultLanguage;
-const currentPathname = Astro.url.pathname;
-
 export interface Props {
   navItems: NavItem[];
-  languagesForSelector: LanguageSelectorItem[];
 }
 
-const { navItems, languagesForSelector } = Astro.props;
+const { navItems } = Astro.props;
 ---
 
 <nav
@@ -33,31 +23,13 @@ const { navItems, languagesForSelector } = Astro.props;
   >
     {
       navItems.map((item) => {
-        const localizedHref = getRelativeLocaleUrl(currentLocale, item.href);
-
-        // Determine active state more accurately for localized paths
-        let isActive = currentPathname === localizedHref;
-        // If it's a root link for a non-default language (e.g., /fr for /fr/)
-        if (
-          item.href === '/' &&
-          localizedHref !== '/' &&
-          currentPathname === localizedHref.replace(/\/$/, '')
-        ) {
+        let isActive = Astro.url.pathname === item.href;
+        // Also check if the current path starts with the href for nested paths
+        if (item.href !== '/' && Astro.url.pathname.startsWith(`${item.href}/`)) {
           isActive = true;
         }
-        // For nested paths, check if the current path starts with the localized href + '/'
-        if (
-          item.href !== '/' &&
-          currentPathname.startsWith(`${localizedHref}/`)
-        ) {
-          isActive = true;
-        }
-        // Special case for default language root
-        if (
-          item.href === '/' &&
-          localizedHref === '/' &&
-          currentPathname === '/'
-        ) {
+        // Special case for root
+        if (item.href === '/' && Astro.url.pathname === '/') {
           isActive = true;
         }
 
@@ -66,7 +38,7 @@ const { navItems, languagesForSelector } = Astro.props;
 
         return (
           <a
-            href={localizedHref}
+            href={item.href}
             aria-label={title}
             aria-current={isActive ? 'page' : undefined}
             class={cn(
@@ -98,11 +70,6 @@ const { navItems, languagesForSelector } = Astro.props;
     }
     {/* Theme Toggle Button */}
     <div class="flex items-center gap-x-3">
-      <LanguageSelector
-        currentLocale={currentLocale}
-        languages={languagesForSelector}
-        client:load
-      />
       <ThemeToggle />
     </div>
   </div>

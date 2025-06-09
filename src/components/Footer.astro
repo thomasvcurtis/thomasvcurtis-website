@@ -1,11 +1,11 @@
 ---
 import { defaultLanguage, useTranslations, type LanguageCode } from '@/i18n/ui';
 
-const lang = (Astro.currentLocale as LanguageCode | undefined) ?? defaultLanguage;
+const lang = 'en' as const;
 const tFooter = useTranslations(lang, 'footer');
 const tSite = useTranslations(lang, 'site');
 
-// You can customize these social links
+
 const socialLinks = [
   { 
     name: 'GitHub', 

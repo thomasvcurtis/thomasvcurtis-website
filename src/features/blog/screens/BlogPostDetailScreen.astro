@@ -1,5 +1,4 @@
 ---
-// src/features/blog/screens/BlogPostDetailScreen.astro
 import Heading from '@/components/Heading.astro';
 import { buttonVariants } from '@/components/ui/button';
 import type { LanguageCode } from '@/i18n/ui';
@@ -8,7 +7,6 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { formatDate } from '@/lib/utils';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import { ArrowLeft, Clock, Pencil } from 'lucide-react';
 import BlogPostCard from '../components/BlogPostCard.astro';
 
@@ -39,7 +37,7 @@ const pageDescription = post.description;
 <BaseLayout {pageTitle} {pageDescription}>
   <article class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
     <a
-      href={getRelativeLocaleUrl(lang, '/blog')}
+      href="/blog"
       class={buttonVariants({ variant: 'ghost' }) + ' mb-6 no-underline'}
     >
       <ArrowLeft className="mr-2 size-4" />
@@ -106,8 +104,8 @@ const pageDescription = post.description;
           rel="noopener noreferrer"
           class={buttonVariants({ variant: 'ghost' }) + ' hover:underline'}
         >
-          <Pencil className=" size-4" />
-          {t('editOnGithub') || 'Proposer une modification sur GitHub'}
+          <Pencil className="mr-2 size-4" />
+          {'Edit on GitHub'}
         </a>
       </div>
     </div>

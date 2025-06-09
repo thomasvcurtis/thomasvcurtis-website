@@ -15,7 +15,7 @@ title: 'Your Post Title'      # Title of your blog post
 description: 'Description'    # Brief description (appears in cards and meta)
 pubDate: 2025-06-08          # Publication date (YYYY-MM-DD)
 heroImage:                    # Hero image configuration
-  url: '../../../../assets/placeholder.webp'  # Path to image
+  url: '/src/assets/placeholder.webp'  # Path to image from project root
   alt: 'Image Description'    # Alt text for accessibility
 tags: ['tag1', 'tag2']       # Array of relevant tags
 difficulty: 'beginner'       # 'beginner', 'intermediate', or 'advanced'
@@ -88,7 +88,7 @@ title: 'Your Amazing Post Title'
 description: 'A clear description of what readers will learn from this post.'
 pubDate: 2025-06-08
 heroImage:
-  url: '../../../../assets/placeholder.webp'
+  url: '/src/assets/placeholder.webp'
   alt: 'Descriptive alt text for the hero image'
 tags: ['astro', 'web-development']
 difficulty: 'beginner'
