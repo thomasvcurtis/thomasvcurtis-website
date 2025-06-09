@@ -6,6 +6,7 @@ import Header from '@/components/Header.astro';
 import BottomAppBar from '@/components/BottomAppBar.astro';
 import { Home, Briefcase, FileText, MessageSquare } from 'lucide-react';
 import { ClientRouter } from 'astro:transitions';
+import Analytics from '@vercel/analytics/astro'
 
 import { Toaster } from 'sonner';
 
@@ -145,6 +146,7 @@ const navItems: Array<NavItem> = [
       src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"
       defer></script>
     <ClientRouter />
+    <Analytics />
   </head>
   <body class="h-[100dvh] bg-background font-sans antialiased flex flex-col">
     {/* Tailwind classes for the body */}

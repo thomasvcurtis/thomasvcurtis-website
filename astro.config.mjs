@@ -56,5 +56,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
+  webAnalytics: {
+      enabled: true,
+  },
+  
   adapter: vercel(),
 });
