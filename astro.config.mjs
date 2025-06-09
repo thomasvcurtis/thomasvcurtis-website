@@ -21,7 +21,7 @@ console.log(`Using Mermaid strategy: ${mermaidStrategy}`);
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com', // IMPORTANT: Replace with your actual domain in production
+  site: 'https://www.thomasvcurtis.com',
   integrations: [
     react(),
     mdx({
