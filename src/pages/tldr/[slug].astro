@@ -1,0 +1,85 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/i18n/ui';
+import { buttonVariants } from '@/components/ui/button';
+import { formatDate } from '@/lib/utils';
+import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
+import Heading from '@/components/Heading.astro';
+import { Badge } from '@/components/ui/badge';
+
+export async function getStaticPaths() {
+  const tldrEntries = await getCollection('tldr');
+  
+  return tldrEntries.map((entry) => ({
+    params: { slug: entry.id.replace(/\.(md|mdx)$/, '') },
+    props: { 
+      entry,
+      slug: entry.id.replace(/\.(md|mdx)$/, '')
+    },
+  }));
+}
+
+const { entry } = Astro.props;
+const lang = 'en';
+const t = useTranslations(lang, 'tldrPost');
+
+const pageTitle = entry.data.title;
+const pageDescription = `TLDR: ${entry.data.title}`;
+
+const { Content } = await render(entry);
+
+---
+
+<BaseLayout {pageTitle} {pageDescription}>
+  <article class="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
+    <a
+      href="/tldr"
+      class={buttonVariants({ variant: 'ghost' }) + ' mb-6 no-underline'}
+    >
+      <ArrowLeft className="mr-2 size-4" />
+      {t('backToList')}
+    </a>
+
+    <header class="mb-8">
+      <Heading title={entry.data.title} titleClassName="md:text-4xl" />
+      <div class="mt-4 flex flex-col gap-2">
+        <p class="text-lg">by: {entry.data.author}</p>
+        <a
+          href={entry.data.sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary hover:underline flex items-center gap-1"
+        >
+          Read original article
+          <ExternalLink className="size-4" />
+        </a>
+        <p class="text-sm text-muted-foreground flex items-center gap-1">
+          <Calendar className="size-4" />
+          {formatDate(entry.data.readDate, lang)}
+        </p>
+      </div>
+    </header>
+
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      {entry.data.thoughts && (
+        <div class="rounded-lg bg-muted/50 p-6">
+          <h2 class="text-xl font-semibold mb-4">My Thoughts</h2>
+          <p class="whitespace-pre-wrap">{entry.data.thoughts}</p>
+        </div>
+      )}
+    </div>
+
+    {
+      entry.data.tags && entry.data.tags.length > 0 && (
+        <div class="mt-8 pt-8 border-t border-border">
+          <div class="flex gap-2">
+            {entry.data.tags.map((tag) => (
+              <Badge variant="secondary">{tag}</Badge>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </article>
+</BaseLayout>

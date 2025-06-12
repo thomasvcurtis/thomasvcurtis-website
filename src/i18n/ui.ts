@@ -1,4 +1,3 @@
-
 export const defaultLanguage = 'en';
 
 export type LanguageCode = 'en';
@@ -59,7 +58,7 @@ export const ui = {
       blog: 'Blog',
       contact: 'Contact',
       projects: 'Projects',
-
+      tldr: 'TLDR',
     },
     footer: {
       rights: 'All rights reserved.',
@@ -68,6 +67,7 @@ export const ui = {
       projects: 'Projects',
       contact: 'Contact',
       social: 'Social',
+      tldr: "TLDR",
     },
     homePage: {
       pageTitle: 'Thomas Curtis - Software Developer',
@@ -195,6 +195,19 @@ export const ui = {
       invalid_string_url: 'Invalid URL.',
       invalid_string_uuid: 'Invalid UUID.',
       // You can add more specific messages as needed
+    },
+    tldrPage: {
+      pageTitle: "TC's TLDR Collection",
+      pageDescription: "My collection of interesting articles and quick thoughts",
+      title: "TC's TLDR",
+      description: "Quick summaries and thoughts on interesting articles I've read",
+      noEntriesFound: "No TLDR entries found."
+    },
+    tldrPost: {
+      backToList: "Back to TLDR List",
+      readOn: "Read on: ",
+      sourceLink: "Original Article",
+      readMore: "Read my thoughts",
     },
   },
 } as const;

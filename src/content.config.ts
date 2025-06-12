@@ -1,6 +1,21 @@
 import { defineCollection, reference, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const tldrCollection = defineCollection({
+  loader: glob({
+    pattern: '**/*.mdx',
+    base: './src/features/tldr/content',
+  }),
+  schema: z.object({
+    title: z.string().min(1),
+    author: z.string().min(1),
+    sourceUrl: z.string().url(),
+    readDate: z.coerce.date(),
+    tags: z.array(z.string()).optional(),
+    thoughts: z.string().optional().describe('Optional personal thoughts or commentary about the article'),
+  }),
+});
+
 const blogCollection = defineCollection({
   loader: glob({
     pattern: '**/*.mdx',
@@ -24,8 +39,7 @@ const blogCollection = defineCollection({
     }),
 });
 
-
-
 export const collections = {
   blog: blogCollection,
+  tldr: tldrCollection,
 };

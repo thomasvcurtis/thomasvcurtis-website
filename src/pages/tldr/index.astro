@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import AllTLDRScreen from '@/features/tldr/screens/AllTLDRScreen.astro';
+import { defaultLanguage } from '@/i18n/ui';
+
+// Get all TLDR entries
+const tldrEntries = await getCollection('tldr');
+
+// Process entries to include slug and sort by read date
+const processedEntries = tldrEntries.map(entry => ({
+  ...entry,
+  slug: entry.id.replace(/\.(md|mdx)$/, '')
+})).sort((a, b) =>
+  new Date(b.data.readDate).valueOf() - new Date(a.data.readDate).valueOf()
+);
+---
+
+<AllTLDRScreen tldrEntries={processedEntries} lang={defaultLanguage} />
